@@ -12,13 +12,11 @@ module.exports = function(cnf) {
 		'noImplicitAny': false,
 		'allowUnreachableCode': false,
 		'noLib': false,
-		//  allowSyntheticDefaultImports: true,
+		 allowSyntheticDefaultImports: true,
 		// 'moduleResolution': 'node',
 		'rootDir': cnf.srcApp,
 		'outDir':  cnf.build
 	};
-
-console.log(cnf.karma.tsDist, cnf.karma.tsSrc);
 
 	return {
 		app: {

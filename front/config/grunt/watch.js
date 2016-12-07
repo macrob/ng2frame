@@ -52,7 +52,7 @@ module.exports = function(cnf) {
             ]
         },
         spec: {
-            files: [cnf.karma.tsSrc + '/**/*.spec.ts'],
+            files: [cnf.ts.spec.src + '/**/*.spec.ts'],
             tasks: [
                 // 'tslint',
                 'clean:spec',

@@ -14,6 +14,7 @@ module.exports = function(cnf) {
 		'noLib': false,
 		"moduleResolution": "classic",
 		// 'rootDir': cnf.srcApp,
+		allowSyntheticDefaultImports: true,
 		"rootDir": "src/app/",
 		'outDir':  cnf.build
 	};

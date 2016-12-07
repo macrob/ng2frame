@@ -9,7 +9,7 @@ console.log(' set -x DEBUG \'grunt*\'');
 const IS_BACK = true;
 
 const CONF_BUILD = path.resolve('.', 'dist', 'gbuild');
-const CONF_TMPL = 'html5-boilerplate';
+// const CONF_TMPL = 'html5-boilerplate';
 
 let wPath = '';
 
@@ -112,6 +112,7 @@ module.exports = function(grunt) {
 					}
 				});
 		}
+
 
 		grunt.initConfig(initConfig);
 
@@ -262,29 +263,33 @@ module.exports = function(grunt) {
 				]);
 		}
 
+
+
 		grunt.loadNpmTasks('grunt-contrib-clean');
 		grunt.loadNpmTasks('grunt-contrib-copy');
-		grunt.loadNpmTasks('grunt-jasmine-nodejs');
-		grunt.loadNpmTasks('grunt-webpack');
-		grunt.loadNpmTasks('grunt-protractor-runner');
-		grunt.loadNpmTasks('grunt-karma');
 		grunt.loadNpmTasks('grunt-ts');
 		grunt.loadNpmTasks('grunt-todo');
 		grunt.loadNpmTasks('grunt-typedoc');
 		grunt.loadNpmTasks('grunt-tslint');
 		grunt.loadNpmTasks('grunt-contrib-watch');
-		grunt.loadNpmTasks('grunt-webdriver-manager');
-		grunt.loadNpmTasks('grunt-selenium-standalone');
-		grunt.loadNpmTasks('grunt-http-server');
 		grunt.loadNpmTasks('grunt-rename');
-		grunt.loadNpmTasks('grunt-browser-sync');
-		grunt.loadNpmTasks('grunt-contrib-sass');
-		// grunt.loadNpmTasks('grunt-contrib-connect');
-		grunt.loadNpmTasks('grunt-express');
 		grunt.loadNpmTasks('grunt-exec');
-		// grunt.loadNpmTasks('grunt-concurrent');
-
-
 		grunt.loadNpmTasks('grunt-replace');
 
+
+		switch (IS_BACK) {
+			case true:
+				grunt.loadNpmTasks('grunt-jasmine-nodejs');
+				grunt.loadNpmTasks('grunt-express');
+			break;
+			default:
+				grunt.loadNpmTasks('grunt-webpack');
+				grunt.loadNpmTasks('grunt-protractor-runner');
+				grunt.loadNpmTasks('grunt-karma');
+				grunt.loadNpmTasks('grunt-webdriver-manager');
+				grunt.loadNpmTasks('grunt-selenium-standalone');
+				grunt.loadNpmTasks('grunt-http-server');
+				grunt.loadNpmTasks('grunt-browser-sync');
+				grunt.loadNpmTasks('grunt-contrib-sass');
+		}
 };
