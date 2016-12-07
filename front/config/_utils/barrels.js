@@ -15,7 +15,10 @@ cnf.systemjsPath = path.resolve(cnf.app, 'systemjs.configs.js');
 var cntModules = format(getModules(cnf));
 // console.log(replace(cnf.systemjsPath, cntModules));
 
-fs.writeFileSync(cnf.systemjsPath, replace(cnf.systemjsPath, cntModules));
+if (fs.existsSync(cnf.systemjsPath)) {
+	fs.writeFileSync(cnf.systemjsPath, replace(cnf.systemjsPath, cntModules));
+}
+
 
 
 
