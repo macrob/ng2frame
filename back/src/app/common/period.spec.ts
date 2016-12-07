@@ -19,6 +19,7 @@ class Test {
 describe('Period', () => {
 
 
+
 	it('Period Argument: today, check defined properties', () => {
 
 		// let t = new Test({from: new Date(), to: new Date()});

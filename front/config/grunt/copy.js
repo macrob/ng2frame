@@ -5,7 +5,7 @@ module.exports = function (cnf) {
 
 	cnf.bower = {
 		src: 'src/bower/bower_components/',
-		dest: cnf.build + 'bower_components/'
+		dest: cnf.build + '/bower_components/'
 	};
 
 	return {

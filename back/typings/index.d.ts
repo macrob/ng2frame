@@ -4,7 +4,8 @@
 //. <reference path="globals/core-js/index.d.ts" />
 /// <reference path="globals/express-serve-static-core/index.d.ts" />
 /// <reference path="globals/express/index.d.ts" />
-// // <reference path="globals/jasmine/index.d.ts" />
+// <reference path="globals/jasmine/index.d.ts" />
+/// <reference path="../node_modules/@types/jasmine/index.d.ts" />
 /// <reference path="globals/lodash/index.d.ts" />
 /// <reference path="globals/mime/index.d.ts" />
 /// <reference path="globals/mongodb/index.d.ts" />

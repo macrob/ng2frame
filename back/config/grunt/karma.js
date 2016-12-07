@@ -6,7 +6,7 @@ module.exports = function(cnf) {
 		unit: {
 			configFile: './config/karma/karma.conf.js',
 			background: false,
-			singleRun: false,
+			singleRun: true,
 			autoWatch: false
 		}
 	};

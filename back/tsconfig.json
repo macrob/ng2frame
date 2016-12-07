@@ -40,7 +40,7 @@
         "noLib": false,
         "outDir": "dist/tbuild/app/",
         "rootDir": "src/app/",
-        "moduleResolution": "classic"
+        "moduleResolution": "node"
     },
     "paths": {
         "*": [

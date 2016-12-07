@@ -14,5 +14,17 @@ module.exports = {
 	build: function (pth = '', build = 'wbuild') {
 		// console.log(path.resolve(ROOT, 'dist', 'wbuild', pth));
 		return path.resolve(ROOT, 'dist', build, pth);
+	},
+	tests: {
+		'reports': {
+			'karma': {
+				'coverage': 'dist/reports/',
+				'results': 'dist/reports/'
+			},
+			'protractor': {
+				'results': 'dist/reports/e2e'
+			}
+		}
 	}
+
 };
