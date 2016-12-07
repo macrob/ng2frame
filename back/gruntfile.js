@@ -104,6 +104,8 @@ module.exports = function(grunt) {
 			default:
 
 				initConfig = Object.assign({}, initConfig, {
+					karma: require('./config/grunt/karma.js')(cnf),
+					browserSync: require('./config/grunt/browserSync.js')(cnf),
 					/* End 2 end testing */
 					webdrivermanager: require('./config/grunt/webdrivermanager.js')(cnf),
 					protractor: require('./config/grunt/protractor.js')(cnf),
@@ -215,6 +217,8 @@ module.exports = function(grunt) {
 				]);
 
 				grunt.registerTask('compile:spec', [
+						'exec:nodeModules',
+						'compile:bower',
 						'ts:spec',
 						'copy:karma',
 						'karma'

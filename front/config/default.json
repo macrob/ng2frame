@@ -22,7 +22,7 @@
 	},
 	"karma": {
 		"host": "192.168.25.129",
-    "port": 9009
+    "port": 9019
 	},
 	"tests": {
 		"reports": {

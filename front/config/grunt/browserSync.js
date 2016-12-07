@@ -37,7 +37,7 @@ module.exports = function(cnf) {
                 port: cnf.httpPort,
                 // tunnel: cnf.httpHost,
                 index: 'index.html',
-                directory: false,
+                directory: true,
                 // directory: true,
 								logFileChanges: false,
                 // the host ip address

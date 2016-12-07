@@ -18,8 +18,8 @@ describe('Validators', () => {
 
 /* tslint:disable */
 
-import { AccountsTypes } from '../contracts/';
-import { Validator } from '../../config/';
+// import { AccountsTypes } from '../contracts/';
+import { Validator } from './validators';
 
 let _ = require('lodash');
 let check = require('check-types');
@@ -85,14 +85,14 @@ describe('test validator', () => {
 			name: Validator.string().require(),
 			value: Validator.number().require(),
 			fname: Validator.string(),
-			type: Validator.list(AccountsTypes).require(),
+			// type: Validator.list(AccountsTypes).require(),
 		};
 
 		let requests = [{
 			req: {
 				name: 'serg',
 				value: 0,
-				type: AccountsTypes.CREDITORS
+				// type: AccountsTypes.CREDITORS
 			},
 			res: {
 				resolve: true,
@@ -112,7 +112,7 @@ describe('test validator', () => {
 			req: {
 				name: 'serg',
 				value: 0,
-				type: AccountsTypes.CREDITORS,
+				// type: AccountsTypes.CREDITORS,
 				fname: 234234
 			},
 			res: {
@@ -269,12 +269,12 @@ describe('test validator', () => {
 		const validatorAccountRequestCreate = Validator.create({
 			name: Validator.string().require(),
 			value: Validator.number().require(),
-			type: Validator.list(AccountsTypes).require(),
+			// type: Validator.list(AccountsTypes).require(),
 		});
 
 		const validatorAccountRequestGet = Validator.create({
 			name: Validator.string(),
-			type: Validator.list(AccountsTypes)
+			// type: Validator.list(AccountsTypes)
 		});
 
 		const validatorAccountRequestList = Validator.create({
