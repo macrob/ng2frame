@@ -9,3 +9,5 @@ front/dist/*
 back/dist/*
 .baseDir
 .tscache
+*/bower_components/*
+bower_components/
