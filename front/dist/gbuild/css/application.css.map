@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAGA,IAAK,GACJ,WAAW,EAHO,GAAiB",
+"sources": ["../../../src/html5-boilerplate/scss/application.scss"],
+"names": [],
+"file": "application.css"
+}

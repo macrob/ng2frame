@@ -1,0 +1,1 @@
+export { BlankWidget } from './blank';

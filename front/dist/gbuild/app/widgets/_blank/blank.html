@@ -1,0 +1,121 @@
+
+<section class="widget" *ngIf="records">
+	<header>
+		<h6>{{ title }}</h6> <span class="fw-semi-bold"></span>
+	</header>
+
+	<div class="widget-body">
+
+
+			<div class="form-actions">
+				<form name="filter">
+					<fieldset>
+						<div class="form-group row">
+							<div class="col-md-1">
+								<button name="apply" class="btn btn-success btn-sm reload" (click)="onReload()"> Apply </button>
+							</div>
+							<div class="col-md-3">
+								<div class="form-group row">
+				 					<datepicker-ionic [expanded]="true" id="on1" [(ngModel)]="filter.start" [ngModelOptions]="{standalone: true}" singleSelect (onDateChange)="onReload($event)"></datepicker-ionic>
+			 					</div>
+
+								<div class="form-group row">
+									<datepicker-ionic [expanded]="true" id="on2" [(ngModel)]="filter.end" [ngModelOptions]="{standalone: true}" singleSelect (onDateChange)="onReload($event)"></datepicker-ionic>
+								</div>
+							</div>
+
+							<div class="col-md-5">
+
+								<select [(ngModel)]="filter.limit" [ngModelOptions]="{standalone: true}" name="limit">
+									<option *ngFor="let item of limits"  value="{{item}}" [selected]="item == filter.limit" >{{item}}</option>
+								</select>
+
+								<select [(ngModel)]="filter.type" [ngModelOptions]="{standalone: true}" name="type">
+									<option value="all" [selected]="'all' === filter.type">all</option>
+									<option value="in" [selected]="'in' === filter.type">In</option>
+									<option value="out" [selected]="'out' === filter.type">Out</option>
+								</select>
+
+								<input type="text" name="amount" [(ngModel)]="filter.amount" placeholder="g0" [ngModelOptions]="{standalone: true}"/>
+							</div>
+						</div>
+
+					<!-- <button class="btn btn-secondary btn-rounded" (click)="OnBulkSend($event)">Send</button>
+					<button class="btn btn-secondary btn-rounded" (click)="OnAddOpen()">Add</button> -->
+
+					<!-- <datepicker></datepicker> -->
+
+
+
+					 <!-- <datepicker-ionic id="on2" [(ngModel)]="filter.end" [ngModelOptions]="{standalone: true}" singleSelect></datepicker-ionic> -->
+					 <!-- <datepicker-ionic multiSelect="2"></datepicker-ionic> -->
+
+				</fieldset>
+				</form>
+			</div>
+
+			<table class="table">
+					<thead>
+						<th>Dt</th>
+						<th>Acc</th>
+						<th>Description</th>
+						<th>Amount</th>
+						<th>Commission</th>
+						<th>Balance</th>
+						<th>Contr</th>
+						<th>Balance</th>
+						<th>lastTrx</th>
+					</thead>
+					<tbody>
+
+						<tr *ngFor="let item of records">
+							<!-- <td title="{{item.hash}}">{{item.dt | date: 'HH:mm dd/MM/yyyy'}}</td> -->
+							<td title="{{item.externalId}}">
+								{{item.dt | date: 'HH:mm dd/MM/yyyy'}}
+							</td>
+
+							<td>{{item.account.name}}</td>
+							<td>{{item.description}}</td>
+
+							<td>
+
+								<div *ngIf="item.account.type === types.CREDITORS">
+
+									<span *ngIf="item.amount > 0" class="label label-success tag tag-success">In</span>
+									<span *ngIf="item.amount < 0" class="label label-danger tag tag-danger">Out</span> {{item.amount }}
+
+								</div>
+								<div *ngIf="item.account.type === types.DEBITORS">
+
+									<span *ngIf="item.amount > 0" class="label label-success tag tag-success">In</span>
+									<span *ngIf="item.amount < 0" class="label label-danger tag tag-danger">Out</span> {{item.amount }}
+
+								</div>
+
+							</td>
+							<td>{{item.commission}}</td>
+							<td>
+
+								{{item.value}}
+							</td>
+
+							<td> <span *ngIf="item.contragentTrx">{{item.contragentTrx.account.name}}</span> </td>
+							<td> <span *ngIf="item.contragentTrx">{{item.contragentTrx.value}}</span> </td>
+							<td> <span *ngIf="item.contragentTrx">{{item.contragentTrx.lastTrx}}</span> </td>
+
+
+
+
+							<td>
+								<!-- <elConfirm class="btn btn-secondary btn-sm" (accept)="onDelete(item, $event)">Delete</elConfirm> -->
+								<!-- <button class="btn btn-success btn-sm" (click)="onSend(item)"> Send </button> -->
+							</td>
+						</tr>
+					</tbody>
+				</table>
+		<script>
+
+		</script>
+
+	</div>
+</section>

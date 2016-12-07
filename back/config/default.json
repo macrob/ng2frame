@@ -1,0 +1,38 @@
+{
+	"app": {
+		"test": "tests",
+		"api": {
+			"baseUrl":  "http://APIURL/"
+		}
+	},
+  "http":{
+    "host": "192.168.25.129",
+    "port": 9006
+  },
+  "webpack":{
+    "host": "192.168.25.129",
+    "port": 9007
+  },
+	"selenium": {
+		"host": "192.168.25.129",
+    "port": 9008
+	},
+	"e2e": {
+		"url": "http://192.168.25.129:9006/"
+	},
+	"karma": {
+		"host": "192.168.25.129",
+    "port": 9009
+	},
+	"tests": {
+		"reports": {
+			"karma": {
+				"coverage": "dist/reports/",
+				"results": "dist/reports/"
+			},
+			"protractor": {
+				"results": "dist/reports/e2e"
+			}
+		}
+	}
+}

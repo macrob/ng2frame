@@ -1,0 +1,20 @@
+{
+  "name": "ng2frame",
+  "homepage": "https://github.com/macrob/ng2frame",
+  "authors": [
+    "macrob <epishkin.serg@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "html5-boilerplate": "^5.3.0"
+  }
+}

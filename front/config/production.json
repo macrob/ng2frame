@@ -1,0 +1,40 @@
+{
+	"src": {
+		"template": "src/html5-boilerplate/",
+		"app":  "src/app/"
+	},
+	"grunt": {
+    "build": "gbuild"
+  },
+	"url": "http://APIURL/",
+  "http":{
+    "host": "172.16.167.153",
+    "port": 9006
+  },
+  "webpack":{
+    "host": "172.16.167.153",
+    "port": 9007
+  },
+	"selenium": {
+		"host": "172.16.167.153",
+    "port": 9008
+	},
+	"e2e": {
+		"build": "e2e/"
+	},
+	"karma": {
+		"host": "172.16.167.153",
+    "port": 9009
+	},
+	"tests": {
+		"reports": {
+			"karma": {
+				"coverage": "dist/reports/",
+				"results": "dist/reports/"
+			},
+			"protractor": {
+				"results": "dist/reports/e2e"
+			}
+		}
+	}
+}

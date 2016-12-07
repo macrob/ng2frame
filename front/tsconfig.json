@@ -1,0 +1,38 @@
+{
+	"files": [
+		"typings/index.d.ts"
+	],
+	"filesGlob": [
+		"typings/index.d.ts",
+		"src/app/**/*.ts",
+		"src/app/*.ts"
+	],
+	"compileOnSave": false,
+	"buildOnSave": false,
+	"exclude": [
+		"e2e"
+	],
+	"compilerOptions": {
+			"target": "es6",
+			"module": "commonjs",
+			"emitDecoratorMetadata": true,
+			"experimentalDecorators": true,
+			"sourceMap": true,
+			"noEmitHelpers": false,
+			"listFiles": true,
+			"noImplicitAny": false,
+			"allowUnreachableCode": false,
+			"noLib": false,
+			"outDir": "dist/wbuild/",
+			"rootDir": "src/",
+			"moduleResolution": "node",
+			"baseUrl": "src",
+			"paths": {
+					"*": [
+							"index",
+							"*",
+							"src"
+					]
+			}
+	}
+}
