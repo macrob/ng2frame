@@ -1,0 +1,10 @@
+front/node_modules/*
+back/node_modules/*
+*/node_modules/*
+.fuse*
+tscommand*
+node_modules
+.tscache/*
+front/dist/*
+back/dist/*
+.baseDir

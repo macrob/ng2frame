@@ -5,10 +5,18 @@
 			"baseUrl":  "http://APIURL/"
 		}
 	},
-  "http":{
-    "host": "192.168.25.129",
-    "port": 9006
-  },
+	"mysql":{
+	    "username": "root",
+	    "password": "root",
+	    "host": "127.0.0.1",
+	    "port": "3306",
+	    "dbname": "balance"
+	  },
+		"http":{
+			"socket": "",
+	    "host": "192.168.25.129",
+	    "port": 9049
+	  },
   "webpack":{
     "host": "192.168.25.129",
     "port": 9007
@@ -23,16 +31,5 @@
 	"karma": {
 		"host": "192.168.25.129",
     "port": 9009
-	},
-	"tests": {
-		"reports": {
-			"karma": {
-				"coverage": "dist/reports/",
-				"results": "dist/reports/"
-			},
-			"protractor": {
-				"results": "dist/reports/e2e"
-			}
-		}
 	}
 }

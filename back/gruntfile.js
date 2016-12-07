@@ -33,9 +33,6 @@ let cnf = {
 
 		karmaPort: config.get('karma.port'),
 		karmaHost: config.get('karma.host'),
-
-		tests: config.get('tests'),
-
 		karma: {
 				module: '',
 				src: 'app/',
@@ -156,7 +153,16 @@ module.exports = function(grunt) {
 										dest: cnf.build + '/app/config/'
 								}]
 						}
-				}
+				},
+				// express: {
+				// 	 webWorker: {
+				// 		 server: path.resolve(cnf.build, 'app', 'webWorker.js'),
+				// 		 hostname:  config.get('http.host'),
+				// 		 port: 54444
+				//
+				// 		 // if you do not define a port it will start your server at port 3000
+				// 	 }
+				//  }
 
 		});
 
@@ -178,7 +184,7 @@ module.exports = function(grunt) {
 		grunt.loadNpmTasks('grunt-browser-sync');
 		grunt.loadNpmTasks('grunt-contrib-sass');
 		// grunt.loadNpmTasks('grunt-contrib-connect');
-
+		grunt.loadNpmTasks('grunt-express');
 		grunt.loadNpmTasks('grunt-exec');
 		// grunt.loadNpmTasks('grunt-concurrent');
 
@@ -187,7 +193,8 @@ module.exports = function(grunt) {
 
 		grunt.registerTask('server:background', [
 				// 'http-server:background'
-				'browserSync'
+				// 'browserSync'
+				'exec:server'
 		]);
 
 		grunt.registerTask('compile:app', [
@@ -206,7 +213,7 @@ module.exports = function(grunt) {
 				'compile:bower'
 		]);
 
-
+		// grunt.registerTask('webWorker', ['express:webWorker', 'express-keepalive']);
 		grunt.registerTask('compile:template', [
 				'sass:template',
 				'copy:template',
@@ -237,8 +244,8 @@ module.exports = function(grunt) {
 
 		grunt.registerTask('hot:app', [
 				'compile:app',
-
-				'server:background',
+				'exec:server:start',
+				// 'server:background',
 				'exec:info',
 				'todo',
 				// 'watch:app'

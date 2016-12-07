@@ -8,10 +8,10 @@ const config = require('config');
 const path = require('path');
 const util = require('../_utils/');
 
-// const build = 'gbuild'; // grunt (gcnf.build) or webpack (wcnf.build)
+const build = 'gbuild'; // grunt (gcnf.build) or webpack (wcnf.build)
 
 const cnf = {
-  build: config.get('grunt.build'),
+  build: build,
   port: config.get('karma.port'),
   host: config.get('karma.host'),
 
@@ -22,13 +22,13 @@ const cnf = {
   testSrcBase: util.src('app') + '/',
 
   // karma: path.resolve(__dirname) + '/',
-  testBase: util.build('app', config.get('grunt.build')) + '/',
-  app:  util.build('app', config.get('grunt.build')) + '/', // transpiled app JS and map files
-  karma: util.build('karma', config.get('grunt.build')) + '/',
-	bower: util.build('bower_components', config.get('grunt.build')) + '/',
+  testBase: util.build('app', build) + '/',
+  app:  util.build('app', build) + '/', // transpiled app JS and map files
+  karma: util.build('karma', build) + '/',
+	bower: util.build('bower_components', build) + '/',
 
-	reportCoverage: config.get('tests.reports.karma.coverage'),
-	reportResult: config.get('tests.reports.karma.results'),
+	reportCoverage: util.tests.reports.karma.coverage,
+	reportResult: util.tests.reports.karma.results,
 
   clientArgs: {}
 }

@@ -1,0 +1,5 @@
+import { Period as PeriodInt} from './period';
+
+export namespace Interface {
+	export interface Period extends PeriodInt {};
+}

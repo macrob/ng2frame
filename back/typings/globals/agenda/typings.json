@@ -1,0 +1,8 @@
+{
+  "resolution": "main",
+  "tree": {
+    "src": "https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/b3889a9127faef8ca41ae67f3bf7aa3e26f1a77d/agenda/agenda.d.ts",
+    "raw": "registry:dt/agenda#0.8.9+20160724060016",
+    "typings": "https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/b3889a9127faef8ca41ae67f3bf7aa3e26f1a77d/agenda/agenda.d.ts"
+  }
+}

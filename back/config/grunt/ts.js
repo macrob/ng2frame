@@ -2,7 +2,7 @@ module.exports = function(cnf) {
 
 
 	var defaultOptions = {
-		'target': 'es5',
+		'target': 'es6',
 		'module': 'commonjs',
 		'emitDecoratorMetadata': true,
 		'experimentalDecorators': true,
@@ -12,9 +12,9 @@ module.exports = function(cnf) {
 		'noImplicitAny': false,
 		'allowUnreachableCode': false,
 		'noLib': false,
-		//  allowSyntheticDefaultImports: true,
-		// 'moduleResolution': 'node',
-		'rootDir': cnf.srcApp,
+		"moduleResolution": "classic",
+		// 'rootDir': cnf.srcApp,
+		"rootDir": "src/app/",
 		'outDir':  cnf.build
 	};
 

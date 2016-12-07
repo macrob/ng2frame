@@ -1,38 +1,45 @@
 {
-	"files": [
-		"typings/index.d.ts"
-	],
-	"filesGlob": [
-		"typings/index.d.ts",
-		"src/app/**/*.ts",
-		"src/app/*.ts"
-	],
-	"compileOnSave": false,
-	"buildOnSave": false,
-	"exclude": [
-		"e2e"
-	],
-	"compilerOptions": {
-			"target": "es6",
-			"module": "commonjs",
-			"emitDecoratorMetadata": true,
-			"experimentalDecorators": true,
-			"sourceMap": true,
-			"noEmitHelpers": false,
-			"listFiles": true,
-			"noImplicitAny": false,
-			"allowUnreachableCode": false,
-			"noLib": false,
-			"outDir": "dist/wbuild/",
-			"rootDir": "src/",
-			"moduleResolution": "node",
-			"baseUrl": "src",
-			"paths": {
-					"*": [
-							"index",
-							"*",
-							"src"
-					]
-			}
-	}
+    "files": [
+        "src/app/config/config.ts",
+        "src/app/config/index.ts",
+        "src/app/config/routing.ts",
+        "src/app/index.d.ts",
+        "src/app/web.ts"
+    ],
+    "filesGlob": [
+        "src/app/**/*.ts"
+    ],
+    "compilerOptions": {
+        "target": "es6",
+        "module": "commonjs",
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "sourceMap": true,
+        "noEmitHelpers": true,
+        "listFiles": true,
+        "noImplicitAny": true,
+        "allowUnreachableCode": false,
+        "noLib": false,
+        "outDir": "dist/tbuild/app/",
+        "rootDir": "src/app/",
+        "moduleResolution": "classic"
+    },
+    "paths": {
+        "*": [
+    		"index",
+            "*",
+            "src/app/*"
+        ]
+    },
+    "exclude": [
+        "node_modules",
+        "typings/index.d.ts",
+        "typings/globals",
+        "src/app/services/statistics"
+    ],
+    "compileOnSave": false,
+    "buildOnSave": false,
+    "atom": {
+        "rewriteTsconfig": false
+    }
 }
