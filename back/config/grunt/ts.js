@@ -59,18 +59,21 @@ console.log(cnf.karma.tsDist, cnf.karma.tsSrc);
 		/* karma units tests ts */
 		spec: {
 			tsconfig: false,
+			options: defaultOptions,
 			files: [{
 				src: [
-					//  cnf.srcApp + '/**/*.spec.ts',
-					cnf.ts.spec.src + '/**/*.spec.ts',
+
+					cnf.ts.app.src + '/**/*.d.ts',
+					cnf.ts.app.src + '/**/*.spec.ts'
+
 				],
 				// dest: cnf.build + '/app/'
-				dest: cnf.ts.spec.dest
+				dest: cnf.ts.app.dest
 			}],
-			// 'exclude': [
-			// 	'node_modules',
-			// ],
-			options: defaultOptions
+			exclude: [
+				'node_modules',
+				// '**/*.spec.ts'
+			]
 		},
 
 		/* Protractor tests ts */

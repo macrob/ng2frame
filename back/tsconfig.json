@@ -1,10 +1,28 @@
 {
     "files": [
+        "src/app/app.spec.ts",
+        "src/app/app.ts",
+        "src/app/common/common.ts",
+        "src/app/common/contracts/contracts.ts",
+        "src/app/common/period.spec.ts",
+        "src/app/common/requests.validator.ts",
+        "src/app/common/validator.ts",
         "src/app/config/config.ts",
         "src/app/config/index.ts",
         "src/app/config/routing.ts",
+        "src/app/controller/controller.ts",
+        "src/app/controller/v1.ts",
         "src/app/index.d.ts",
-        "src/app/web.ts"
+        "src/app/job.ts",
+        "src/app/jobWorker.ts",
+        "src/app/services/contracts/base.ts",
+        "src/app/services/contracts/contracts.ts",
+        "src/app/services/contracts/model.ts",
+        "src/app/services/contracts/service.ts",
+        "src/app/services/services.ts",
+        "src/app/spec/helpers/objects.helper.ts",
+        "src/app/web.ts",
+        "src/app/webWorker.ts"
     ],
     "filesGlob": [
         "src/app/**/*.ts"
@@ -26,7 +44,7 @@
     },
     "paths": {
         "*": [
-    		"index",
+            "index",
             "*",
             "src/app/*"
         ]

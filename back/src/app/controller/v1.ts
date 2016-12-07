@@ -60,7 +60,7 @@ export class Account extends Controller {
 
 
 	public list(req: express.Request, res: express.Response, next: express.NextFunction): Promise<any> | any {
-		return '423fsdfsdasdffsfsdfffsfsdfsfsdsdfsdsdfsdfd';
+		return '3444442342423423sd4444444432423fffdsdsdfsdfffsdfsd';
 	}
 
 	public create(req: express.Request, res: express.Response, next: express.NextFunction): Promise<any> | any {

@@ -68,14 +68,14 @@ module.exports = function(cnf) {
                 'ts:e2e',
             ]
         },
-        karmaRestart: {
-            files: ['config/karma/karma.conf.js'],
-            tasks: [
-                // 'karma:unit:restart'
-                'karma:unit:stop',
-                'karma:unit:start'
-            ]
-        }
+        // karmaRestart: {
+        //     files: ['config/karma/karma.conf.js'],
+        //     tasks: [
+        //         // 'karma:unit:restart'
+        //         'karma:unit:stop',
+        //         'karma:unit:start'
+        //     ]
+        // }
     };
 
     tasks.protractor = {
@@ -90,14 +90,16 @@ module.exports = function(cnf) {
     // tasks.karma = {
     //     files: _.union(tasks.ts.files, tasks.app.files, tasks.spec.files),
     //     tasks: [
-    //     'karma:unit:run'
+    //     // 'karma:unit:run'
+		// 			'jasmine_nodejs'
     //     ]
     // };
     tasks.karma = {
         files: [cnf.build + '/app/**/*.js', cnf.build + '/app/**/*.html'],
 		// files: [cnf.karma.tsDist + '/**/*.js', cnf.karma.tsDist + '/app/**/*.html'],
         tasks: [
-        'karma:unit:run'
+        // 'karma:unit:run'
+				'jasmine_nodejs'
         ]
     };
 

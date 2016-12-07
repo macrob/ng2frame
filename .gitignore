@@ -8,3 +8,4 @@ node_modules
 front/dist/*
 back/dist/*
 .baseDir
+.tscache

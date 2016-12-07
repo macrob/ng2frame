@@ -207,7 +207,7 @@ var npmAssets  = '/base/node_modules/'; // component assets fetched by Angular's
 
     // port: 9876,
     colors: true,
-    logLevel: config.LOG_DISABLE,
+    // logLevel: config.LOG_DISABLE,
 		// logLevel: 'DISABLE',
     // autoWatch: false,
     // // browsers: ['Chrome'],

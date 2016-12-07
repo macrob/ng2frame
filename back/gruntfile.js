@@ -31,8 +31,8 @@ let cnf = {
 		httpPort: config.get('http.port'),
 		httpHost: config.get('http.host'),
 
-		karmaPort: config.get('karma.port'),
-		karmaHost: config.get('karma.host'),
+		// karmaPort: config.get('karma.port'),
+		// karmaHost: config.get('karma.host'),
 		karma: {
 				module: '',
 				src: 'app/',
@@ -115,7 +115,7 @@ module.exports = function(grunt) {
 				copy: require('./config/grunt/copy.js')(cnf),
 				clean: require('./config/grunt/clean.js')(cnf),
 				'http-server': require('./config/grunt/http-server.js')(cnf),
-				browserSync: require('./config/grunt/browserSync.js')(cnf),
+				// browserSync: require('./config/grunt/browserSync.js')(cnf),
 
 				/*
 				ts:app - compile app ts files
@@ -130,8 +130,8 @@ module.exports = function(grunt) {
 				protractor: require('./config/grunt/protractor.js')(cnf),
 
 				/* KARMA UNIT TEST CNF */
-				karma: require('./config/grunt/karma.js')(cnf),
-
+				// karma: require('./config/grunt/karma.js')(cnf),
+				'jasmine_nodejs': require('./config/grunt/jasmine_nodejs.js')(cnf),
 				exec: require('./config/grunt/exec.js')(cnf),
 
 				sass: {
@@ -232,8 +232,9 @@ module.exports = function(grunt) {
 		grunt.registerTask('compile:spec', [
 				'exec:nodeModules',
 				'ts:spec',
-				'copy:karma',
-				'karma'
+				'jasmine_nodejs'
+				// 'copy:karma',
+				// 'karma'
 		]);
 
 		grunt.registerTask('compile:e2e', [
