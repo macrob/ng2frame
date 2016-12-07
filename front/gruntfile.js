@@ -6,159 +6,261 @@ const debug = require('debug')('grunt:cnf:gruntfile.js');
 console.log('To show debug info set DEBUG="grunt*"');
 console.log(' set -x DEBUG \'grunt*\'');
 
+const IS_BACK = false;
 
-let CONF = {
-	template: 'html5-boilerplate',
+const CONF_BUILD = path.resolve('.', 'dist', 'gbuild');
+const CONF_TMPL = 'html5-boilerplate';
+
+let wPath = '';
+
+switch (true) {
+	case process.env.wpath !== undefined:
+		wPath = process.env.wpath;
+	break;
+	case /^q?hot:app-karma/.test(process.argv[2]):
+		let tasks = process.argv[2].split(':');
+
+		if (tasks.length === 3) {
+				wPath += tasks[2] + '/';
+				process.env.wpath = tasks[2];
+		}
+	break;
 }
 
-
-
-let build = path.resolve('.', 'dist', 'gbuild');
-
+process.env.karmaTestsRoot = 'app/' + wPath;
 
 let cnf = {
-		srcApp: path.resolve('.', 'src', 'app'),
-		srcTpl: path.resolve('.', 'src', CONF.template),
-		root: path.resolve('.'),
-		build: build,
+	srcApp: path.resolve('.', 'src', 'app'),
+	root: path.resolve('.'),
+	workingPath: wPath,
+	build: CONF_BUILD,
 
-		e2eBuild: path.resolve('.', 'dist', 'e2e'),
-		e2eIsActive: /e2e/.test(process.argv[2]),
+	httpPort: config.get('http.port'),
+	httpHost: config.get('http.host'),
 
-		seleniumPort: config.get('selenium.port'),
-		seleniumHost: config.get('selenium.host'),
-
-		httpPort: config.get('http.port'),
-		httpHost: config.get('http.host'),
-
-		karmaPort: config.get('karma.port'),
-		karmaHost: config.get('karma.host'),
-
-		tests: config.get('tests'),
-
-		karma: {
-				module: '',
-				src: 'app/',
-				tsSrc: path.resolve('.', 'src', 'app'),
-				tsDist: path.resolve(build, 'app')
-		},
-		sass: {
-				template: {
-						src: path.resolve('.', 'src', CONF.template, 'scss'),
-						dest: path.resolve(build, 'css')
-				}
-		},
-		npm: {
-			src: path.resolve('.', 'node_modules'),
-			dest: build
-		}
-};
-
-/* karma conf */
-// cnf.karma.src = 'app/';
-let tasks;
-switch (true) {
-		case process.env.karmaOpt !== undefined:
-				cnf.karma.module = process.env.karmaOpt;
-				cnf.karma.src += process.env.karmaOpt + '/';
-				cnf.karma.tsSrc += process.env.karmaOpt + '/';
-				break;
-		case /^q?hot:app-karma/.test(process.argv[2]):
-				tasks = process.argv[2].split(':');
-
-				if (tasks.length === 3) {
-						cnf.karma.src += tasks[2] + '/';
-						cnf.karma.tsSrc += tasks[2] + '/';
-						cnf.karma.module = tasks[2];
-						// cnf.karma.tsDist +=  tasks[2] + '/';
-
-						process.env.karmaOpt = tasks[2];
-				}
-				break;
-				// case /^q?hot:app/.test(process.argv[2]):
-				// 	tasks = process.argv[2].split(':');
-				//
-				// 	if (tasks.length === 3) {
-				// 		cnf.karma.src +=  tasks[2] + '/';
-				// 		cnf.karma.tsSrc +=  tasks[2] + '/';
-				// 		cnf.karma.module =  tasks[2];
-				// 		// cnf.karma.tsDist +=  tasks[2] + '/';
-				//
-				// 		process.env.karmaOpt = tasks[2];
-				// 	}
-				// break;
-}
-
-cnf.ts = {
+	workingPath: wPath,
+	ts: {
 		app: {
-				src: cnf.srcApp,
-				dest: cnf.build + '/app/'
+			src: path.resolve('.', 'src', 'app'),
+			dest: path.resolve(CONF_BUILD, 'app'),
 		},
 		appModule: {
-				src: cnf.srcApp + '/' + cnf.karma.module + '/',
-				dest: cnf.build + '/app/'
+			src: path.resolve('.', 'src', 'app', wPath),
+			dest: path.resolve(CONF_BUILD, 'app'),
 		},
 		spec: {
-				src: cnf.karma.tsSrc,
-				dest: cnf.build + '/app/',
+			src: path.resolve('.', 'src', 'app', wPath),
+			dest: path.resolve(CONF_BUILD, 'app'),
 		}
+	}
 };
 
-process.env.karmaTestsRoot = cnf.karma.src;
+if (!IS_BACK) {
+	cnf = Object.assign({}, cnf, {
+		srcTpl: path.resolve('.', 'src', CONF_TMPL),
+		e2eBuild: path.resolve('.', 'dist', 'e2e'),
+		e2eIsActive: /e2e/.test(process.argv[2]),
+		seleniumPort: config.get('selenium.port'),
+		seleniumHost: config.get('selenium.host'),
+		karmaPort: config.get('karma.port'),
+		karmaHost: config.get('karma.host'),
+		sass: {
+				template: {
+						src: path.resolve('.', 'src', CONF_TMPL, 'scss'),
+						dest: path.resolve(CONF_BUILD, 'css')
+				}
+		},
+	});
+}
+
 debug(cnf);
 
 module.exports = function(grunt) {
 		'use strict';
 
-		grunt.initConfig({
-				watch: require('./config/grunt/watch.js')(cnf),
+		let initConfig = {
+			tslint: require('./config/grunt/tslint.js'),
+			todo: require('./config/grunt/todo.js'),
+			copy: require('./config/grunt/copy.js')(cnf),
+			clean: require('./config/grunt/clean.js')(cnf),
+			watch: require('./config/grunt/watch.js')(cnf),
 
-				tslint: require('./config/grunt/tslint.js'),
-				todo: require('./config/grunt/todo.js'),
-				copy: require('./config/grunt/copy.js')(cnf),
-				clean: require('./config/grunt/clean.js')(cnf),
-				'http-server': require('./config/grunt/http-server.js')(cnf),
-				browserSync: require('./config/grunt/browserSync.js')(cnf),
+			// 'http-server': require('./config/grunt/http-server.js')(cnf),
+			// browserSync: require('./config/grunt/browserSync.js')(cnf),
+			ts: require('./config/grunt/ts.js')(cnf),
+			exec: require('./config/grunt/exec.js')(cnf),
+			replace: require('./config/grunt/replace.js')(Object.assign({}, cnf, {
+				variables: config.get('app')
+			})),
+		};
 
-				/*
-				ts:app - compile app ts files
-				ts:spec - compile spec ts files
-				ts: e2e - e2e app ts files
-				*/
-				ts: require('./config/grunt/ts.js')(cnf),
+		switch(IS_BACK) {
+			case true:
+				initConfig = Object.assign({}, initConfig, {
+					'jasmine_nodejs': require('./config/grunt/jasmine_nodejs.js')(cnf),
+
+				});
+			break;
+			default:
+
+				initConfig = Object.assign({}, initConfig, {
+					/* End 2 end testing */
+					webdrivermanager: require('./config/grunt/webdrivermanager.js')(cnf),
+					protractor: require('./config/grunt/protractor.js')(cnf),
+					sass: {
+							template: require('./config/grunt/sass.js')(cnf.sass.template)
+					}
+				});
+		}
+
+		grunt.initConfig(initConfig);
+
+		grunt.registerTask('hot:app', [
+				'compile:app',
+				'server:background',
+				'exec:info',
+				'todo',
+				// 'watch:app'
+				'watch'
+		]);
+
+		grunt.registerTask('qhot:app', [
+				'compile:app',
+
+				'server:background',
+				'watch:tsModule'
+		]);
+
+		grunt.registerTask('hot:app-karma', [
+				'compile:app',
+
+				/* karma */
+				'compile:spec',
+
+				'server:background',
+				'exec:info',
+				'todo',
+				// 'watch:app-karma'
+				'watch'
+		]);
+
+		grunt.registerTask('qhot:app-karma', [
+				'compile:spec',
+				'server:background',
+				'watch'
+		]);
+
+		grunt.registerTask('default', [
+			'hot:app-karma'
+		]);
+
+		switch (IS_BACK) {
+			case true:
+				grunt.registerTask('server:background', [
+						'exec:server'
+				]);
+
+				grunt.registerTask('compile:app', [
+						'tslint',
+						'clean:build',
+
+						'copy:app',
+
+						// 'compile:templateSing',
+						'ts:app',
+						'ts:appModule',
+						'replace',
+				]);
+
+				grunt.registerTask('compile:spec', [
+						'exec:nodeModules',
+						'ts:spec',
+						'jasmine_nodejs'
+				]);
+			break;
+			default:
+				grunt.registerTask('server:background', [
+						// 'http-server:background'
+						// 'browserSync'
+						'browserSync'
+				]);
+
+				grunt.registerTask('compile:app', [
+						'tslint',
+						'clean:build',
+
+						/* template copy */
+						'compile:template',
+						'copy:app',
+
+						// 'compile:templateSing',
+						'ts:app',
+						'ts:appModule',
+						'replace',
+						'exec:barrels',
+						'compile:bower'
+				]);
+
+				grunt.registerTask('compile:template', [
+						'clean:build',
+						'sass:template',
+						'copy:template',
+						'replace'
+				]);
 
 
-				/* End 2 end testing */
-				webdrivermanager: require('./config/grunt/webdrivermanager.js')(cnf),
-				protractor: require('./config/grunt/protractor.js')(cnf),
+				grunt.registerTask('compile:bower', [
+						'copy:bower',
+				]);
 
-				/* KARMA UNIT TEST CNF */
-				karma: require('./config/grunt/karma.js')(cnf),
+				grunt.registerTask('compile:spec', [
+						'ts:spec',
+						'copy:karma',
+						'karma'
+				]);
 
-				exec: require('./config/grunt/exec.js')(cnf),
+				grunt.registerTask('compile:e2e', [
+						'clean:e2e',
+						'ts:e2e',
+						'protractor'
+				]);
 
-				sass: {
-						template: require('./config/grunt/sass.js')(cnf.sass.template),
-				},
+				grunt.registerTask('hot:app-karma-e2e', [
+						'compile:app',
+						'compile:spec',
 
-				replace: {
-						dist: {
-								options: {
-										patterns: [{
-												json: config.get('app')
+						'server:background',
+						'webdrivermanager:start',
 
-										}]
-								},
-								files: [{
-										expand: true,
-										flatten: true,
-										src: [cnf.build + '/app/config/index.js'],
-										dest: cnf.build + '/app/config/'
-								}]
-						}
-				}
 
-		});
+						'compile:e2e',
+						'exec:info',
+						'todo',
+						'watch'
+				]);
+
+				grunt.registerTask('hot:e2e', [
+						'server:background',
+						'webdrivermanager:start',
+
+						/* e2e protractor */
+						'compile:e2e',
+
+						'exec:info',
+						'todo',
+						// 'watch:e2e'
+						'watch'
+				]);
+
+				grunt.registerTask('hot:template', [
+						// 'clean:build',
+						// 'copy:template',
+						'compile:template',
+						'server:background',
+						// 'watch:template'
+						'watch'
+				]);
+		}
 
 		grunt.loadNpmTasks('grunt-contrib-clean');
 		grunt.loadNpmTasks('grunt-contrib-copy');
@@ -178,155 +280,11 @@ module.exports = function(grunt) {
 		grunt.loadNpmTasks('grunt-browser-sync');
 		grunt.loadNpmTasks('grunt-contrib-sass');
 		// grunt.loadNpmTasks('grunt-contrib-connect');
-
+		grunt.loadNpmTasks('grunt-express');
 		grunt.loadNpmTasks('grunt-exec');
 		// grunt.loadNpmTasks('grunt-concurrent');
 
 
 		grunt.loadNpmTasks('grunt-replace');
 
-		grunt.registerTask('server:background', [
-				// 'http-server:background'
-				'browserSync'
-		]);
-
-		grunt.registerTask('compile:app', [
-				'tslint',
-				'clean:build',
-
-				/* template copy */
-				'compile:template',
-				'copy:app',
-
-				// 'compile:templateSing',
-				'ts:app',
-				'ts:appModule',
-
-				'exec:barrels',
-				'compile:bower'
-		]);
-
-
-		grunt.registerTask('compile:template', [
-				'sass:template',
-				'copy:template',
-		]);
-
-		//
-		// grunt.registerTask('compile:templateSing', [
-		// 	'sass:templateSing',
-		// 	'copy:templateSing',
-		// ]);
-
-		grunt.registerTask('compile:bower', [
-				'copy:bower',
-		]);
-
-		grunt.registerTask('compile:spec', [
-				'exec:nodeModules',
-				'ts:spec',
-				'copy:karma',
-				'karma'
-		]);
-
-		grunt.registerTask('compile:e2e', [
-				'clean:e2e',
-				'ts:e2e',
-				'protractor'
-		]);
-
-		grunt.registerTask('hot:app', [
-				'compile:app',
-
-				'server:background',
-				'exec:info',
-				'todo',
-				// 'watch:app'
-				'watch'
-		]);
-
-		grunt.registerTask('qhot:app', [
-				'compile:app',
-
-				'server:background',
-				// 'exec:info',
-				// 'todo',
-				// 'watch:app'
-				'watch:ts'
-		]);
-
-		grunt.registerTask('hot:app-karma', [
-				'compile:app',
-
-				/* karma */
-				'compile:spec',
-
-				'server:background',
-				'exec:info',
-				'todo',
-				// 'watch:app-karma'
-				'watch'
-		]);
-
-		grunt.registerTask('qhot:app-karma', [
-				/* karma */
-				'compile:spec',
-
-				'server:background',
-				// 'exec:info',
-				// 'todo',
-				// 'watch:app-karma'
-				'watch'
-		]);
-
-
-		grunt.registerTask('hot:app-karma-e2e', [
-				'compile:app',
-
-
-				/* karma */
-				'compile:spec',
-
-				'server:background',
-				'webdrivermanager:start',
-
-				/* e2e protractor */
-				'compile:e2e',
-
-				'exec:info',
-				'todo',
-				// 'watch:app-karma-e2e'
-				'watch'
-
-		]);
-
-		grunt.registerTask('hot:e2e', [
-				'server:background',
-				'webdrivermanager:start',
-
-				/* e2e protractor */
-				'compile:e2e',
-
-				'exec:info',
-				'todo',
-				// 'watch:e2e'
-				'watch'
-		]);
-
-		grunt.registerTask('hot:template', [
-				'clean:build',
-				'copy:template',
-				'server:background',
-				// 'watch:template'
-				'watch'
-		]);
-
-		grunt.registerTask('default', [
-				'clean:build',
-				'compile:template',
-				'replace',
-				'server:background',
-				// 'watch:template'
-				'watch'
-		]);
 };
