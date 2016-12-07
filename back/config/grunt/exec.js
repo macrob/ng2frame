@@ -45,8 +45,8 @@ module.exports = function(cnf) {
 					// stdout: false,
 					// stderr: false,
 					cmd: function() {
-						var pthNodeModules = cnf.npm.src;
-						var pthDist = cnf.npm.dest;
+						var pthNodeModules = path.resolve(cnf.root, 'node_modules');
+						var pthDist = cnf.build;
 
 						if(!fs.existsSync(path.resolve(pthDist, 'node_modules'))) {
 							console.log('ln -s ' + pthNodeModules + ' ' + pthDist);

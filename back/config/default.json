@@ -1,35 +1,17 @@
 {
 	"app": {
-		"test": "tests",
-		"api": {
-			"baseUrl":  "http://APIURL/"
-		}
+
 	},
 	"mysql":{
-	    "username": "root",
-	    "password": "root",
-	    "host": "127.0.0.1",
-	    "port": "3306",
-	    "dbname": "balance"
-	  },
-		"http":{
-			"socket": "",
-	    "host": "192.168.25.129",
-	    "port": 2222
-	  },
-  "webpack":{
-    "host": "192.168.25.129",
-    "port": 9007
-  },
-	"selenium": {
-		"host": "192.168.25.129",
-    "port": 9008
+		"username": "root",
+		"password": "root",
+		"host": "127.0.0.1",
+		"port": "3306",
+		"dbname": "balance"
 	},
-	"e2e": {
-		"url": "http://192.168.25.129:9006/"
-	},
-	"karma": {
+	"http":{
+		"socket": "",
 		"host": "192.168.25.129",
-    "port": 9009
+		"port": 2222
 	}
 }

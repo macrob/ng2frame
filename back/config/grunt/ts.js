@@ -18,7 +18,6 @@ module.exports = function(cnf) {
 		'outDir':  cnf.build
 	};
 
-console.log(cnf.karma.tsDist, cnf.karma.tsSrc);
 
 	return {
 		app: {

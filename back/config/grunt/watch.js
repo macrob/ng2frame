@@ -52,7 +52,7 @@ module.exports = function(cnf) {
             ]
         },
         spec: {
-            files: [cnf.karma.tsSrc + '/**/*.spec.ts'],
+            files: [cnf.ts.spec.src + '/**/*.spec.ts'],
             tasks: [
                 // 'tslint',
                 'clean:spec',
@@ -96,7 +96,6 @@ module.exports = function(cnf) {
     // };
     tasks.karma = {
         files: [cnf.build + '/app/**/*.js', cnf.build + '/app/**/*.html'],
-		// files: [cnf.karma.tsDist + '/**/*.js', cnf.karma.tsDist + '/app/**/*.html'],
         tasks: [
         // 'karma:unit:run'
 				'jasmine_nodejs'
