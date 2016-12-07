@@ -11,3 +11,5 @@ back/dist/*
 .tscache
 */bower_components/*
 bower_components/
+front/dist/*
+dist/
